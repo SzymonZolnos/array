@@ -1,53 +1,54 @@
 #include <iostream>
-#define SIZE 10
+#include "array.h"
 
-void displayArray(int *array){
-    for (int i = 0; i < SIZE; ++i) {
-        printf("*(array + %d) = %d\n",i, *(array+i));
-    }
+void displayMenu(){
+    printf("1. Wprowadz dane\n");
+    printf("2. wyswietl dane\n");
+    printf("3. oblicz srednia\n");
+    printf("4. oblicz maksimum\n");
+    printf("5. oblicz minimum\n");
+    printf("0. koniec\n\n");
+    printf("twoj wybor to: ");
 }
-
-float calcAverage(int *array){
-    int sum = 0;
-    for (int i = 0; i < SIZE; ++i) {
-        sum+= *(array+i);
-    }
-    return (float) sum / SIZE;
-}
-
-int calcMin(int *array){
-    int min = *array;
-    for (int i = 1; i < SIZE; ++i) {
-        if(*(array + i) < min)
-            min = *(array + i);
-    }
-    return min;
-}
-int calcMax(int *array){
-    int max = *array;
-    for (int i = 1; i < SIZE; ++i) {
-        if(*(array + i) > max)
-            max = *(array + i);
-    }
-    return max;
-}
-
-void fetchData(int *array){
-    for (int i = 0; i < SIZE; ++i) {
-        printf("*(array + %d) = ", i);
-        scanf("%d", (array + i));
-    }
+void clear(){
+    while (getchar() != '\n');
 }
 
 int main() {
-    int array[SIZE] = {1,2,3,4,5,6,7,8,9,10};
+    int array [SIZE] = {1,6,43,32,12,3,12,321,321,4};
+    int input;
 
-    fetchData(array);
-    displayArray(array);
-    printf("Srednia wynosi %f\n", calcAverage(array));
-    printf("minimum wynosi: %d\n", calcMin(array));
-    printf("maksimum wynosi: %d\n", calcMax(array));
+    do{
+        displayMenu();
+        scanf("%d", &input);
+        clear();
+        switch (input) {
+            case 1:
+                fetchData(array);
+                break;
+            case 2:
+                displayArray(array);
+                getchar();
+                break;
+            case 3:
+                printf("Srednia wynosi %f\n", calcAverage(array));
+                getchar();
+                break;
+            case 4:
+                printf("maksimum wynosi: %d\n", calcMax(array));
+                getchar();
+                break;
+            case 5:
+                printf("minimum wynosi: %d\n", calcMin(array));
+                getchar();
+                break;
+            default:
+                printf("podano bledny wybor");
+                break;
+        }
+        printf("\n\n\n\n\n\n");
 
+    } while (input);
 
     return 0;
 }
